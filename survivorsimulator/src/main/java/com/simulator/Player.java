@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player {
-    HashMap<Attribute, Integer> attributeMap;
-    ArrayList<PlayerConnection> relationships;
-    int threatPoints;
-
     public enum Attribute {Physical, Endurance, Mental, Stamina, SocialSkills, Tempermant,
                             Strategic, Loyalty, Forgivingness, Boldness, Influence, Intuition}
+    HashMap<Attribute, Integer> attributeMap;
+    ArrayList<PlayerConnection> relationships;
+
+    int threatPoints;
     
     public Player(ArrayList<Integer> attributeValues) {
         for (Attribute currAtr : Attribute.values()) {
@@ -34,13 +34,6 @@ public class Player {
         }
     }
 
-    private PlayerConnection getConnection(Player p1, Player p2) {
-        for(PlayerConnection connection : relationships) {
-            if (connection.getP1() == p1 && connection.getP2() == p2 || connection.getP1() == p2 && connection.getP2() == p1) return connection;
-        }
-        return null;
-    }
-
     public void addConnection(PlayerConnection connection) {
         relationships.add(connection);
     }
@@ -51,5 +44,12 @@ public class Player {
 
     public void increaseThreat(int inc) {
         threatPoints += inc;
+    }
+
+    private PlayerConnection getConnection(Player p1, Player p2) {
+        for(PlayerConnection connection : relationships) {
+            if (connection.getP1() == p1 && connection.getP2() == p2 || connection.getP1() == p2 && connection.getP2() == p1) return connection;
+        }
+        return null;
     }
 }
